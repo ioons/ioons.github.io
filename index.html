@@ -160,6 +160,68 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-stone" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2019/08/28/stone/">stone</a>
+    </h1>
+  
+
+        
+        <a href="/2019/08/28/stone/" class="archive-article-date">
+  	<time datetime="2019-08-28T09:54:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-08-28</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="石器时代备份游客账号"><a href="#石器时代备份游客账号" class="headerlink" title="石器时代备份游客账号"></a>石器时代备份游客账号</h1><figure class="highlight lua"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">"TSLib"</span>)</span><br><span class="line">init(<span class="string">"0"</span>, <span class="number">1</span>)</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">findFile</span><span class="params">(path)</span></span></span><br><span class="line">    <span class="keyword">local</span> a = <span class="built_in">io</span>.<span class="built_in">popen</span>(<span class="string">"find "</span>..<span class="built_in">path</span>..<span class="string">" -prune"</span>);</span><br><span class="line">    <span class="keyword">local</span> f = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span> l <span class="keyword">in</span> a:<span class="built_in">lines</span>() <span class="keyword">do</span></span><br><span class="line">        <span class="built_in">table</span>.<span class="built_in">insert</span>(f,l)</span><br><span class="line">    <span class="keyword">end</span></span><br><span class="line">    a:<span class="built_in">close</span>()</span><br><span class="line">    <span class="keyword">return</span> f</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">copyfile</span><span class="params">(path,to)</span></span></span><br><span class="line">    <span class="built_in">os</span>.<span class="built_in">execute</span>(<span class="string">"cp -rf "</span>..<span class="built_in">path</span>..<span class="string">" "</span>..to);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">movefile</span><span class="params">(path,to)</span></span><span class="comment">--帮你玩平台禁用此函数</span></span><br><span class="line">    <span class="built_in">os</span>.<span class="built_in">execute</span>(<span class="string">"mv "</span>..<span class="built_in">path</span>..<span class="string">" "</span>..to);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">newfolder</span><span class="params">(path)</span></span><span class="comment">--帮你玩平台禁用此函数</span></span><br><span class="line">	<span class="built_in">os</span>.<span class="built_in">execute</span>(<span class="string">"mkdir -p "</span>..<span class="built_in">path</span>);</span><br><span class="line">	<span class="built_in">os</span>.<span class="built_in">execute</span>(<span class="string">"chmod -R 777 "</span>..<span class="built_in">path</span>);</span><br><span class="line"><span class="keyword">end</span></span><br><span class="line">newfolder(<span class="string">"/var/mobile/Media/stonemmocnback"</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">--找到路径</span></span><br><span class="line">file = findFile(<span class="string">"/User/Containers/Data/Application/*/Library/Preferences/com.netmarble.stonemmocn.plist"</span>);</span><br><span class="line">toast(file[<span class="number">1</span>],<span class="number">5</span>)</span><br><span class="line"><span class="comment">--初始化时间</span></span><br><span class="line"><span class="built_in">time</span> = getNetTime();</span><br><span class="line">mtime=<span class="built_in">os</span>.<span class="built_in">date</span>(<span class="string">"%Y%m%d%H%M%S"</span>,<span class="built_in">time</span>)</span><br><span class="line"><span class="comment">--备份授权</span></span><br><span class="line">copyfile(file[<span class="number">1</span>],<span class="string">"/var/mobile/Media/stonemmocnback/"</span>..mtime..<span class="string">"com.netmarble.stonemmocn.plist.1"</span>);</span><br><span class="line">copyfile(file[<span class="number">1</span>],<span class="string">"/var/mobile/Media/stonemmocnback/com.netmarble.stonemmocn.plist.1"</span>);</span><br><span class="line">copyfile(file[<span class="number">1</span>],file[<span class="number">1</span>]..<span class="string">".bak"</span>);</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/08/28/stone/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-flex" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
